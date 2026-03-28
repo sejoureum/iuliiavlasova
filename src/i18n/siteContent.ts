@@ -37,6 +37,10 @@ export type SiteStrings = {
     eyebrow: string
     title: string
     description: string
+    addressLabel: string
+    address: string
+    sirenLabel: string
+    sirenNumber: string
   }
   footer: string
 }
@@ -114,6 +118,10 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
       title: "Let's discuss your project",
       description:
         'Email or messenger — I usually reply within a couple of days.',
+      addressLabel: 'Address',
+      address: '113 Boulevard de la Croisette',
+      sirenLabel: 'SIREN',
+      sirenNumber: '103014544',
     },
     footer: 'Iuliia VLASOVA — IT Consulting Services',
   },
@@ -189,6 +197,10 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
       title: 'Parlons de votre projet',
       description:
         'Par e-mail ou messagerie — je réponds en général sous quelques jours.',
+      addressLabel: 'Adresse',
+      address: '113 Boulevard de la Croisette',
+      sirenLabel: 'SIREN',
+      sirenNumber: '103014544',
     },
     footer: 'Iuliia VLASOVA — Services de conseil IT',
   },
@@ -264,6 +276,10 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
       title: 'Давайте обсудим задачу',
       description:
         'Напишите на почту или в мессенджер — отвечу в течение пары дней.',
+      addressLabel: 'Адрес',
+      address: '113 Boulevard de la Croisette',
+      sirenLabel: 'SIREN',
+      sirenNumber: '103014544',
     },
     footer: 'Iuliia VLASOVA — IT Consulting Services',
   },
