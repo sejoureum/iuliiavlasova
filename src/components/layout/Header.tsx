@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { easeOut } from '@/lib/motion-variants'
 import { useSiteLanguage } from '@/context/SiteLanguageContext'
 import { siteContent, type SiteLang } from '@/i18n/siteContent'
 
@@ -12,6 +14,7 @@ const langTabs: { id: SiteLang; label: string }[] = [
 ]
 
 export function Header() {
+  const reduce = useReducedMotion()
   const { lang, setLang } = useSiteLanguage()
   const t = siteContent[lang]
   const nav = [
@@ -22,7 +25,12 @@ export function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur-md">
+    <motion.header
+      className="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur-md"
+      initial={reduce ? false : { opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: reduce ? 0 : 0.42, ease: easeOut }}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <Link
           to="/"
@@ -103,6 +111,6 @@ export function Header() {
           ))}
         </nav>
       </div>
-    </header>
+    </motion.header>
   )
 }
