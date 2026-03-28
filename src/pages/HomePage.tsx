@@ -1,17 +1,10 @@
 import { ArrowRight, Mail, Phone } from 'lucide-react'
 import { SectionHeading } from '@/components/SectionHeading'
-import { cn } from '@/lib/utils'
 import { useSiteLanguage } from '@/context/SiteLanguageContext'
-import { siteContent, type SiteLang } from '@/i18n/siteContent'
-
-const langTabs: { id: SiteLang; label: string }[] = [
-  { id: 'en', label: 'ENG' },
-  { id: 'fr', label: 'FR' },
-  { id: 'ru', label: 'RU' },
-]
+import { siteContent } from '@/i18n/siteContent'
 
 export function HomePage() {
-  const { lang, setLang } = useSiteLanguage()
+  const { lang } = useSiteLanguage()
   const t = siteContent[lang]
   const hero = t.hero
 
@@ -19,34 +12,9 @@ export function HomePage() {
     <>
       <section
         lang={hero.sectionLang}
-        className="relative flex min-h-[100dvh] flex-col border-b border-neutral-200 bg-gradient-to-b from-white to-neutral-100"
+        className="flex min-h-[100dvh] flex-col border-b border-neutral-200 bg-gradient-to-b from-white to-neutral-100"
       >
-        <div
-          className="absolute right-4 top-20 z-10 sm:right-6 sm:top-24"
-          role="group"
-          aria-label={t.ariaLangSwitcher}
-        >
-          <div className="flex border border-neutral-900 bg-white">
-            {langTabs.map(({ id, label }) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() => setLang(id)}
-                className={cn(
-                  'min-w-[3rem] rounded-none border-0 border-r border-neutral-900 px-3 py-2 text-xs font-semibold tracking-wide transition last:border-r-0',
-                  lang === id
-                    ? 'bg-neutral-900 text-white'
-                    : 'bg-white text-neutral-900 hover:bg-neutral-100',
-                )}
-                aria-pressed={lang === id}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative flex flex-1 flex-col justify-center px-4 pb-20 pt-28 sm:px-6 sm:pb-24 sm:pt-32">
+        <div className="flex flex-1 flex-col justify-center px-4 pb-20 pt-16 sm:px-6 sm:pb-24 sm:pt-20">
           <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500">
               {hero.eyebrow}
@@ -61,14 +29,14 @@ export function HomePage() {
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
               <a
                 href="#about"
-                className="inline-flex items-center gap-2 bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
+                className="inline-flex items-center gap-2 border border-neutral-900 bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
               >
                 {hero.ctaPrimary}
                 <ArrowRight className="size-4" />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
+                className="inline-flex items-center gap-2 border-2 border-neutral-900 bg-white px-6 py-3 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-50"
               >
                 {hero.ctaSecondary}
               </a>
@@ -80,7 +48,7 @@ export function HomePage() {
       <section
         id="about"
         lang={hero.sectionLang}
-        className="scroll-mt-24 border-b border-[color:var(--color-accent-soft)]/60"
+        className="scroll-mt-24 border-b border-neutral-200 bg-white"
       >
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <SectionHeading
@@ -92,12 +60,12 @@ export function HomePage() {
             {t.about.cards.map((item) => (
               <article
                 key={item.title}
-                className="rounded-2xl border border-[color:var(--color-accent-soft)]/80 bg-white/60 p-6 shadow-sm"
+                className="border border-neutral-200 bg-neutral-50 p-6"
               >
-                <h3 className="text-lg font-semibold text-[color:var(--color-ink)]">
+                <h3 className="text-lg font-semibold text-neutral-900">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[color:var(--color-muted)]">
+                <p className="mt-2 text-sm leading-relaxed text-neutral-500">
                   {item.text}
                 </p>
               </article>
@@ -148,25 +116,29 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="contact" lang={hero.sectionLang} className="scroll-mt-24">
+      <section
+        id="contact"
+        lang={hero.sectionLang}
+        className="scroll-mt-24 bg-neutral-50"
+      >
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-          <div className="rounded-3xl border border-[color:var(--color-accent-soft)] bg-[linear-gradient(135deg,var(--color-accent-soft)_0%,transparent_55%)] p-8 sm:p-12">
+          <div className="border border-neutral-200 bg-white p-8 sm:p-12">
             <SectionHeading
               eyebrow={t.contact.eyebrow}
               title={t.contact.title}
               description={t.contact.description}
             />
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href="mailto:iuliiavlasova.fr@gmail.com"
-                className="inline-flex items-center gap-3 rounded-full bg-[color:var(--color-ink)] px-6 py-3 text-sm font-semibold text-[color:var(--color-canvas)] transition hover:bg-[color:var(--color-accent)]"
+                className="inline-flex items-center justify-center gap-3 border border-neutral-900 bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
               >
                 <Mail className="size-4 shrink-0" />
                 iuliiavlasova.fr@gmail.com
               </a>
               <a
                 href="tel:+33743679886"
-                className="inline-flex items-center gap-3 rounded-full border border-[color:var(--color-accent-soft)] bg-white/80 px-6 py-3 text-sm font-semibold text-[color:var(--color-ink)] transition hover:border-[color:var(--color-accent)]/50"
+                className="inline-flex items-center justify-center gap-3 border-2 border-neutral-900 bg-white px-6 py-3 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-50"
               >
                 <Phone className="size-4 shrink-0" />
                 +33 7 43 67 98 86
