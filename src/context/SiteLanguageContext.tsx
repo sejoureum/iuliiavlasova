@@ -15,7 +15,7 @@ type Value = {
 const SiteLanguageContext = createContext<Value | null>(null)
 
 export function SiteLanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<SiteLang>('ru')
+  const [lang, setLang] = useState<SiteLang>('en')
 
   useEffect(() => {
     document.documentElement.lang =
