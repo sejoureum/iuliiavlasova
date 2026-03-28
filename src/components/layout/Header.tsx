@@ -2,14 +2,17 @@ import { useState } from 'react'
 import { Link } from 'react-router'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
-const nav = [
-  { href: '#about', label: 'Обо мне' },
-  { href: '#work', label: 'Работы' },
-  { href: '#contact', label: 'Контакты' },
-]
+import { useSiteLanguage } from '@/context/SiteLanguageContext'
+import { siteContent } from '@/i18n/siteContent'
 
 export function Header() {
+  const { lang } = useSiteLanguage()
+  const t = siteContent[lang]
+  const nav = [
+    { href: '#about', label: t.nav.about },
+    { href: '#pricing', label: t.nav.pricing },
+    { href: '#contact', label: t.nav.contact },
+  ]
   const [open, setOpen] = useState(false)
 
   return (

@@ -1,170 +1,95 @@
-import { useState } from 'react'
-import { ArrowRight, Mail } from 'lucide-react'
+import { ArrowRight, Mail, Phone } from 'lucide-react'
 import { SectionHeading } from '@/components/SectionHeading'
 import { cn } from '@/lib/utils'
+import { useSiteLanguage } from '@/context/SiteLanguageContext'
+import { siteContent, type SiteLang } from '@/i18n/siteContent'
 
-type HeroLang = 'en' | 'fr' | 'ru'
-
-const heroCopy: Record<
-  HeroLang,
-  {
-    sectionLang: string
-    imageSrc: string
-    imageAlt: string
-    eyebrow: string
-    title: string
-    lead: string
-    ctaPrimary: string
-    ctaSecondary: string
-  }
-> = {
-  en: {
-    sectionLang: 'en',
-    imageSrc: '/hero.svg',
-    imageAlt: 'Home — visual introduction',
-    eyebrow: 'IT Consulting Services',
-    title: "Hello, I'm Iuliia Vlasova — IT consulting from strategy to delivery, with clarity you can act on.",
-    lead: 'Explore selected work and get in touch to discuss your context — timelines, scope, and contact details are easy to adapt.',
-    ctaPrimary: 'View projects',
-    ctaSecondary: 'Contact me',
-  },
-  fr: {
-    sectionLang: 'fr',
-    imageSrc: '/hero-fr.svg',
-    imageAlt: 'Accueil — présentation visuelle',
-    eyebrow: 'Services de conseil IT',
-    title: 'Bonjour, je suis Iuliia Vlasova — conseil IT, de la stratégie à la mise en œuvre, avec des livrables clairs.',
-    lead: 'Parcourez des exemples et écrivez-moi pour parler de votre contexte — les textes et coordonnées sont faciles à adapter.',
-    ctaPrimary: 'Voir les projets',
-    ctaSecondary: 'Me contacter',
-  },
-  ru: {
-    sectionLang: 'ru',
-    imageSrc: '/hero-ru.svg',
-    imageAlt: 'Главный экран — визуальное представление',
-    eyebrow: 'IT-консалтинг',
-    title: 'Здравствуйте, я Иулия Власова — консалтинг в IT: от стратегии до внедрения, с понятными результатами.',
-    lead: 'Посмотрите примеры работ и напишите, если хотите обсудить задачу — тексты и контакты легко заменить.',
-    ctaPrimary: 'К проектам',
-    ctaSecondary: 'Написать мне',
-  },
-}
-
-const langTabs: { id: HeroLang; label: string }[] = [
+const langTabs: { id: SiteLang; label: string }[] = [
   { id: 'en', label: 'ENG' },
   { id: 'fr', label: 'FR' },
   { id: 'ru', label: 'RU' },
 ]
 
-const projects = [
-  {
-    title: 'Проект «Альфа»',
-    tag: 'Веб',
-    description: 'Лендинг и визуальная система для небольшого бренда.',
-  },
-  {
-    title: 'Серия иллюстраций',
-    tag: 'Графика',
-    description: 'Набор работ в единой палитре для соцсетей и печати.',
-  },
-  {
-    title: 'Редизайн портфолио',
-    tag: 'UI',
-    description: 'Структура страниц, типографика и адаптивная вёрстка.',
-  },
-]
-
 export function HomePage() {
-  const [heroLang, setHeroLang] = useState<HeroLang>('ru')
-  const hero = heroCopy[heroLang]
+  const { lang, setLang } = useSiteLanguage()
+  const t = siteContent[lang]
+  const hero = t.hero
 
   return (
     <>
       <section
         lang={hero.sectionLang}
-        className="relative flex min-h-[100dvh] flex-col border-b border-[color:var(--color-accent-soft)]/80"
+        className="relative flex min-h-[100dvh] flex-col border-b border-neutral-200 bg-gradient-to-b from-white to-neutral-100"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,var(--color-accent-soft)_0%,transparent_55%)] opacity-60" />
         <div
           className="absolute right-4 top-20 z-10 sm:right-6 sm:top-24"
           role="group"
-          aria-label="Язык героя"
+          aria-label={t.ariaLangSwitcher}
         >
-          <div className="flex rounded-full border border-[color:var(--color-accent-soft)] bg-[color:var(--color-canvas)]/90 p-0.5 shadow-sm backdrop-blur-sm">
+          <div className="flex border border-neutral-900 bg-white">
             {langTabs.map(({ id, label }) => (
               <button
                 key={id}
                 type="button"
-                onClick={() => setHeroLang(id)}
+                onClick={() => setLang(id)}
                 className={cn(
-                  'min-w-[2.75rem] rounded-full px-2.5 py-1.5 text-xs font-semibold tracking-wide transition',
-                  heroLang === id
-                    ? 'bg-[color:var(--color-accent)] text-white'
-                    : 'text-[color:var(--color-muted)] hover:text-[color:var(--color-ink)]',
+                  'min-w-[3rem] rounded-none border-0 border-r border-neutral-900 px-3 py-2 text-xs font-semibold tracking-wide transition last:border-r-0',
+                  lang === id
+                    ? 'bg-neutral-900 text-white'
+                    : 'bg-white text-neutral-900 hover:bg-neutral-100',
                 )}
-                aria-pressed={heroLang === id}
+                aria-pressed={lang === id}
               >
                 {label}
               </button>
             ))}
           </div>
         </div>
-        <div className="relative flex min-h-0 flex-1 flex-col items-center justify-center px-4 pt-20 pb-6 sm:px-6 sm:pt-24">
-          <img
-            key={hero.imageSrc}
-            src={hero.imageSrc}
-            alt={hero.imageAlt}
-            className="h-auto w-full max-w-5xl object-contain object-center drop-shadow-[0_25px_50px_-12px_rgba(0,0,0,0.15)] [max-height:min(72vh,640px)]"
-          />
-        </div>
-        <div className="relative mx-auto flex w-full max-w-2xl flex-col items-center gap-5 px-4 pb-12 pt-2 text-center sm:px-6 sm:pb-16">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-[color:var(--color-accent)]">
-            {hero.eyebrow}
-          </p>
-          <h1 className="text-3xl font-semibold leading-tight tracking-tight text-[color:var(--color-ink)] sm:text-4xl md:text-5xl">
-            {hero.title}
-          </h1>
-          <p className="max-w-xl text-base text-[color:var(--color-muted)] sm:text-lg">{hero.lead}</p>
-          <div className="mt-2 flex flex-wrap justify-center gap-4">
-            <a
-              href="#work"
-              className="inline-flex items-center gap-2 rounded-full bg-[color:var(--color-accent)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
-            >
-              {hero.ctaPrimary}
-              <ArrowRight className="size-4" />
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-accent-soft)] bg-white/80 px-6 py-3 text-sm font-semibold text-[color:var(--color-ink)] transition hover:border-[color:var(--color-accent)]/50"
-            >
-              {hero.ctaSecondary}
-            </a>
+
+        <div className="relative flex flex-1 flex-col justify-center px-4 pb-20 pt-28 sm:px-6 sm:pb-24 sm:pt-32">
+          <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500">
+              {hero.eyebrow}
+            </p>
+            <div className="h-px w-16 bg-neutral-900" aria-hidden />
+            <h1 className="text-3xl font-semibold leading-snug tracking-tight text-neutral-900 sm:text-4xl md:text-[2.75rem] md:leading-tight">
+              {hero.title}
+            </h1>
+            <p className="max-w-xl text-base leading-relaxed text-neutral-500 sm:text-lg">
+              {hero.lead}
+            </p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#about"
+                className="inline-flex items-center gap-2 bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
+              >
+                {hero.ctaPrimary}
+                <ArrowRight className="size-4" />
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
+              >
+                {hero.ctaSecondary}
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="about" className="scroll-mt-24 border-b border-[color:var(--color-accent-soft)]/60">
+      <section
+        id="about"
+        lang={hero.sectionLang}
+        className="scroll-mt-24 border-b border-[color:var(--color-accent-soft)]/60"
+      >
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <SectionHeading
-            eyebrow="Обо мне"
-            title="Кратко о подходе"
-            description="Сочетаю внимание к деталям с ясной структурой: сначала смысл и сценарии, затем визуал и реализация."
+            eyebrow={t.about.eyebrow}
+            title={t.about.title}
+            description={t.about.description}
           />
           <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {[
-              {
-                title: 'Исследование',
-                text: 'Разбираю аудиторию и контекст, чтобы решения не были случайными.',
-              },
-              {
-                title: 'Дизайн',
-                text: 'Типографика, сетка, цвет — как единая система, а не набор картинок.',
-              },
-              {
-                title: 'Сдача',
-                text: 'Передаю макеты и ассеты так, чтобы внедрение прошло без сюрпризов.',
-              },
-            ].map((item) => (
+            {t.about.cards.map((item) => (
               <article
                 key={item.title}
                 className="rounded-2xl border border-[color:var(--color-accent-soft)]/80 bg-white/60 p-6 shadow-sm"
@@ -181,52 +106,72 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="work" className="scroll-mt-24 border-b border-[color:var(--color-accent-soft)]/60">
+      <section
+        id="pricing"
+        lang={hero.sectionLang}
+        className="scroll-mt-24 border-b border-neutral-200 bg-white"
+      >
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <SectionHeading
-            eyebrow="Работы"
-            title="Избранные проекты"
-            description="Заглушки под кейсы — замените заголовки, теги и описания на реальные."
+            eyebrow={t.pricing.eyebrow}
+            title={t.pricing.title}
+            description={t.pricing.description}
           />
-          <ul className="mt-10 grid gap-6 md:grid-cols-3">
-            {projects.map((p) => (
+          <ul className="mt-10 border border-neutral-200 bg-neutral-50">
+            {t.pricing.rows.map((row) => (
               <li
-                key={p.title}
-                className="group flex flex-col rounded-2xl border border-[color:var(--color-accent-soft)]/80 bg-gradient-to-br from-white to-[color:var(--color-canvas)] p-6 shadow-sm transition hover:shadow-md"
+                key={row.id}
+                className="flex flex-col gap-2 border-b border-neutral-200 px-5 py-5 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
               >
-                <span className="text-xs font-semibold uppercase tracking-wider text-[color:var(--color-accent)]">
-                  {p.tag}
-                </span>
-                <h3 className="mt-2 text-xl font-semibold text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)]">
-                  {p.title}
-                </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-[color:var(--color-muted)]">
-                  {p.description}
+                <div>
+                  <p className="font-semibold text-neutral-900">{row.name}</p>
+                  {row.note ? (
+                    <p className="mt-1 text-sm text-neutral-500">{row.note}</p>
+                  ) : null}
+                </div>
+                <p className="shrink-0 text-sm font-semibold text-neutral-900 sm:text-base">
+                  {row.price}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--color-accent)] opacity-0 transition group-hover:opacity-100">
-                  Подробнее <ArrowRight className="size-4" />
-                </span>
               </li>
             ))}
           </ul>
+          <p className="mt-6 text-sm text-neutral-500">
+            {t.pricing.footerBefore}
+            <a
+              href="#contact"
+              className="font-medium text-neutral-900 underline underline-offset-2 hover:no-underline"
+            >
+              {t.pricing.footerLink}
+            </a>
+            {t.pricing.footerAfter}
+          </p>
         </div>
       </section>
 
-      <section id="contact" className="scroll-mt-24">
+      <section id="contact" lang={hero.sectionLang} className="scroll-mt-24">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="rounded-3xl border border-[color:var(--color-accent-soft)] bg-[linear-gradient(135deg,var(--color-accent-soft)_0%,transparent_55%)] p-8 sm:p-12">
             <SectionHeading
-              eyebrow="Контакты"
-              title="Давайте обсудим задачу"
-              description="Напишите на почту или оставьте ссылку на мессенджер — отвечу в течение пары дней."
+              eyebrow={t.contact.eyebrow}
+              title={t.contact.title}
+              description={t.contact.description}
             />
-            <a
-              href="mailto:hello@example.com"
-              className="mt-8 inline-flex items-center gap-3 rounded-full bg-[color:var(--color-ink)] px-6 py-3 text-sm font-semibold text-[color:var(--color-canvas)] transition hover:bg-[color:var(--color-accent)]"
-            >
-              <Mail className="size-4" />
-              hello@example.com
-            </a>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+              <a
+                href="mailto:iuliiavlasova.fr@gmail.com"
+                className="inline-flex items-center gap-3 rounded-full bg-[color:var(--color-ink)] px-6 py-3 text-sm font-semibold text-[color:var(--color-canvas)] transition hover:bg-[color:var(--color-accent)]"
+              >
+                <Mail className="size-4 shrink-0" />
+                iuliiavlasova.fr@gmail.com
+              </a>
+              <a
+                href="tel:+33743679886"
+                className="inline-flex items-center gap-3 rounded-full border border-[color:var(--color-accent-soft)] bg-white/80 px-6 py-3 text-sm font-semibold text-[color:var(--color-ink)] transition hover:border-[color:var(--color-accent)]/50"
+              >
+                <Phone className="size-4 shrink-0" />
+                +33 7 43 67 98 86
+              </a>
+            </div>
           </div>
         </div>
       </section>
