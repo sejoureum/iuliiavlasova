@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router'
+import { FloatingMessengers } from '@/components/layout/FloatingMessengers'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SiteLanguageProvider } from '@/context/SiteLanguageContext'
@@ -12,6 +13,7 @@ export function RootLayout() {
           <Outlet />
         </main>
         <Footer />
+        <FloatingMessengers />
       </div>
     </SiteLanguageProvider>
   )

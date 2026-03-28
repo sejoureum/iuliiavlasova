@@ -10,6 +10,8 @@ export type PricingRow = {
 export type SiteStrings = {
   nav: { about: string; pricing: string; contact: string }
   ariaLangSwitcher: string
+  ariaWhatsApp: string
+  ariaTelegram: string
   hero: {
     sectionLang: string
     eyebrow: string
@@ -48,6 +50,8 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
   en: {
     nav: { about: 'About', pricing: 'Pricing', contact: 'Contact' },
     ariaLangSwitcher: 'Interface language',
+    ariaWhatsApp: 'Chat on WhatsApp',
+    ariaTelegram: 'Chat on Telegram',
     hero: {
       sectionLang: 'en',
       eyebrow: 'IT Consulting Services',
@@ -126,6 +130,8 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
   fr: {
     nav: { about: 'À propos', pricing: 'Tarifs', contact: 'Contact' },
     ariaLangSwitcher: 'Langue de l’interface',
+    ariaWhatsApp: 'Discuter sur WhatsApp',
+    ariaTelegram: 'Discuter sur Telegram',
     hero: {
       sectionLang: 'fr',
       eyebrow: 'Services de conseil IT',
@@ -204,6 +210,8 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
   ru: {
     nav: { about: 'Обо мне', pricing: 'Цены', contact: 'Контакты' },
     ariaLangSwitcher: 'Язык интерфейса',
+    ariaWhatsApp: 'Написать в WhatsApp',
+    ariaTelegram: 'Написать в Telegram',
     hero: {
       sectionLang: 'ru',
       eyebrow: 'IT-консалтинг',
