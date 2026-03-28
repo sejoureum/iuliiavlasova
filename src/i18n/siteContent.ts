@@ -39,10 +39,9 @@ export type SiteStrings = {
     description: string
     addressLabel: string
     address: string
-    sirenLabel: string
-    sirenNumber: string
   }
   footer: string
+  footerSiren: string
 }
 
 export const siteContent: Record<SiteLang, SiteStrings> = {
@@ -119,11 +118,10 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
       description:
         'Email or messenger — I usually reply within a couple of days.',
       addressLabel: 'Address',
-      address: '113 Boulevard de la Croisette',
-      sirenLabel: 'SIREN',
-      sirenNumber: '103014544',
+      address: '113 Boulevard de la Croisette\n06400 Cannes, France',
     },
     footer: 'Iuliia VLASOVA — IT Consulting Services',
+    footerSiren: 'SIREN 103014544',
   },
   fr: {
     nav: { about: 'À propos', pricing: 'Tarifs', contact: 'Contact' },
@@ -198,11 +196,10 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
       description:
         'Par e-mail ou messagerie — je réponds en général sous quelques jours.',
       addressLabel: 'Adresse',
-      address: '113 Boulevard de la Croisette',
-      sirenLabel: 'SIREN',
-      sirenNumber: '103014544',
+      address: '113 Boulevard de la Croisette\n06400 Cannes, France',
     },
     footer: 'Iuliia VLASOVA — Services de conseil IT',
+    footerSiren: 'SIREN 103014544',
   },
   ru: {
     nav: { about: 'Обо мне', pricing: 'Цены', contact: 'Контакты' },
@@ -277,10 +274,9 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
       description:
         'Напишите на почту или в мессенджер — отвечу в течение пары дней.',
       addressLabel: 'Адрес',
-      address: '113 Boulevard de la Croisette',
-      sirenLabel: 'SIREN',
-      sirenNumber: '103014544',
+      address: '113 Boulevard de la Croisette\n06400 Cannes, France',
     },
     footer: 'Iuliia VLASOVA — IT Consulting Services',
+    footerSiren: 'SIREN 103014544',
   },
 }

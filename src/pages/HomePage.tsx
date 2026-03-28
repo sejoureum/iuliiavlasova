@@ -128,27 +128,17 @@ export function HomePage() {
               title={t.contact.title}
               description={t.contact.description}
             />
-            <div className="mt-8 grid gap-6 border-b border-neutral-200 pb-8 sm:grid-cols-2">
-              <div className="flex gap-3">
-                <MapPin
-                  className="mt-0.5 size-5 shrink-0 text-neutral-500"
-                  aria-hidden
-                />
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.15em] text-neutral-500">
-                    {t.contact.addressLabel}
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-neutral-900">
-                    {t.contact.address}
-                  </p>
-                </div>
-              </div>
+            <div className="mt-8 flex gap-3 border-b border-neutral-200 pb-8">
+              <MapPin
+                className="mt-0.5 size-5 shrink-0 text-neutral-500"
+                aria-hidden
+              />
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-neutral-500">
-                  {t.contact.sirenLabel}
+                  {t.contact.addressLabel}
                 </p>
-                <p className="mt-1 text-sm font-medium tabular-nums tracking-wide text-neutral-900">
-                  {t.contact.sirenNumber}
+                <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-neutral-900">
+                  {t.contact.address}
                 </p>
               </div>
             </div>
