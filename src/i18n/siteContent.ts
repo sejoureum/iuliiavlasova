@@ -15,6 +15,7 @@ export type SiteStrings = {
   hero: {
     sectionLang: string
     eyebrow: string
+    headline: string
     title: string
     lead: string
     ctaPrimary: string
@@ -55,6 +56,7 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
     hero: {
       sectionLang: 'en',
       eyebrow: 'IT Consulting Services',
+      headline: 'Strategy\nto delivery.',
       title:
         "Hello, I'm Iuliia Vlasova — IT consulting from strategy to delivery, with clarity you can act on.",
       lead: 'Get in touch to discuss your context — timelines, scope, and contact details are easy to adapt.',
@@ -118,7 +120,7 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
     },
     contact: {
       eyebrow: 'Contact',
-      title: "Let's discuss your project",
+      title: "Get in touch.",
       description:
         'Email or messenger — I usually reply within a couple of days.',
       addressLabel: 'Address',
@@ -135,6 +137,7 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
     hero: {
       sectionLang: 'fr',
       eyebrow: 'Services de conseil IT',
+      headline: 'Stratégie\net réalisation.',
       title:
         'Bonjour, je suis Iuliia Vlasova — conseil IT, de la stratégie à la mise en œuvre, avec des livrables clairs.',
       lead: 'Écrivez-moi pour parler de votre contexte — les textes et coordonnées sont faciles à adapter.',
@@ -198,7 +201,7 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
     },
     contact: {
       eyebrow: 'Contact',
-      title: 'Parlons de votre projet',
+      title: 'Écrivez-moi.',
       description:
         'Par e-mail ou messagerie — je réponds en général sous quelques jours.',
       addressLabel: 'Adresse',
@@ -215,6 +218,7 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
     hero: {
       sectionLang: 'ru',
       eyebrow: 'IT-консалтинг',
+      headline: 'От стратегии\nдо результата.',
       title:
         'Здравствуйте, я Юлия Власова — консалтинг в IT: от стратегии до внедрения, с понятными результатами.',
       lead: 'Напишите, если хотите обсудить задачу — тексты и контакты легко заменить.',
@@ -278,7 +282,7 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
     },
     contact: {
       eyebrow: 'Контакты',
-      title: 'Давайте обсудим задачу',
+      title: 'Напишите мне.',
       description:
         'Напишите на почту или в мессенджер — отвечу в течение пары дней.',
       addressLabel: 'Адрес',

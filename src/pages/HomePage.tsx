@@ -1,7 +1,7 @@
-import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { SectionHeading } from '@/components/SectionHeading'
 import { Reveal } from '@/components/motion/Reveal'
+import { RotatingCubes } from '@/components/RotatingCubes'
 import { useSiteLanguage } from '@/context/SiteLanguageContext'
 import { siteContent } from '@/i18n/siteContent'
 import {
@@ -10,6 +10,28 @@ import {
   staggerItem,
   viewportOnce,
 } from '@/lib/motion-variants'
+
+function SectionDivider({
+  number,
+  label,
+  dark = false,
+}: {
+  number: string
+  label: string
+  dark?: boolean
+}) {
+  return (
+    <div className="flex items-center gap-4">
+      <span className={`font-mono text-[10px] font-semibold tracking-[0.25em] ${dark ? 'text-white/30' : 'text-neutral-400'}`}>
+        {number}
+      </span>
+      <div className={`h-px flex-1 ${dark ? 'bg-white/10' : 'bg-neutral-200'}`} />
+      <span className={`font-mono text-[10px] font-semibold tracking-[0.25em] ${dark ? 'text-white/30' : 'text-neutral-400'}`}>
+        /{label}
+      </span>
+    </div>
+  )
+}
 
 export function HomePage() {
   const { lang } = useSiteLanguage()
@@ -22,233 +44,295 @@ export function HomePage() {
 
   return (
     <>
-      <section
-        lang={hero.sectionLang}
-        className="flex min-h-[100dvh] flex-col border-b border-neutral-200 bg-gradient-to-b from-white to-neutral-100"
-      >
-        <div className="flex flex-1 flex-col justify-center px-4 pb-20 pt-16 sm:px-6 sm:pb-24 sm:pt-20">
+      {/* ── HERO — white ── */}
+      <section lang={hero.sectionLang} className="border-b border-neutral-200 bg-white">
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-16">
+          <Reveal>
+            <SectionDivider number="001" label="INTRO" />
+          </Reveal>
+
+          <div className="mt-12 grid items-center gap-12 sm:mt-16 lg:grid-cols-2 lg:gap-16">
           <motion.div
-            className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center"
             variants={staggerParent}
             initial="hidden"
             animate="visible"
           >
             <motion.p
-              className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500"
+              className="text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-400"
               variants={staggerItem}
               transition={itemTransition}
             >
               {hero.eyebrow}
             </motion.p>
-            <motion.div
-              className="h-px w-16 bg-neutral-900"
-              aria-hidden
+
+            <motion.h1
+              className="font-display mt-5 max-w-4xl whitespace-pre-line text-6xl font-black leading-[0.95] tracking-tight text-neutral-900 sm:text-7xl md:text-8xl lg:text-[7rem]"
               variants={staggerItem}
               transition={itemTransition}
-            />
-            <motion.h1
-              className="text-3xl font-semibold leading-snug tracking-tight text-neutral-900 sm:text-4xl md:text-[2.75rem] md:leading-tight"
+            >
+              {hero.headline}
+            </motion.h1>
+
+            <motion.p
+              className="mt-8 max-w-md text-sm leading-relaxed text-neutral-500 sm:text-base"
               variants={staggerItem}
               transition={itemTransition}
             >
               {hero.title}
-            </motion.h1>
-            <motion.p
-              className="max-w-xl text-base leading-relaxed text-neutral-500 sm:text-lg"
-              variants={staggerItem}
-              transition={itemTransition}
-            >
-              {hero.lead}
             </motion.p>
+
             <motion.div
-              className="mt-4 flex flex-wrap items-center justify-center gap-3"
+              className="mt-10 flex flex-wrap items-center gap-3"
               variants={staggerItem}
               transition={itemTransition}
             >
               <motion.a
                 href="#about"
-                className="inline-flex items-center gap-2 border border-neutral-900 bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
+                className="group inline-flex items-center gap-2.5 border border-neutral-900 bg-neutral-900 px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-neutral-700"
                 whileHover={reduce ? undefined : { y: -2 }}
                 whileTap={reduce ? undefined : { scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
                 {hero.ctaPrimary}
-                <ArrowRight className="size-4" />
+                <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
               </motion.a>
               <motion.a
                 href="#contact"
-                className="inline-flex items-center gap-2 border-2 border-neutral-900 bg-white px-6 py-3 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-50"
+                className="group inline-flex items-center gap-2.5 border border-neutral-300 bg-white px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900"
                 whileHover={reduce ? undefined : { y: -2 }}
                 whileTap={reduce ? undefined : { scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
                 {hero.ctaSecondary}
+                <ArrowUpRight className="size-3.5" />
               </motion.a>
             </motion.div>
           </motion.div>
+
+          {/* cube illustration */}
+          <Reveal className="flex justify-center lg:justify-end">
+            <RotatingCubes />
+          </Reveal>
+
+          </div>
         </div>
       </section>
 
-      <section
-        id="about"
-        lang={hero.sectionLang}
-        className="scroll-mt-24 border-b border-neutral-200 bg-white"
-      >
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      {/* ── ABOUT — black ── */}
+      <section id="about" lang={hero.sectionLang} className="scroll-mt-16 bg-neutral-900">
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-16">
           <Reveal>
-            <SectionHeading
-              eyebrow={t.about.eyebrow}
-              title={t.about.title}
-              description={t.about.description}
-            />
+            <SectionDivider number="002" label="ABOUT" dark />
           </Reveal>
-          <motion.div
-            className="mt-10 grid gap-8 md:grid-cols-3"
-            variants={staggerParent}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-          >
-            {t.about.cards.map((item) => (
-              <motion.article
-                key={item.title}
-                className="border border-neutral-200 bg-neutral-50 p-6"
-                variants={staggerItem}
-                transition={itemTransition}
-                whileHover={reduce ? undefined : { y: -4 }}
-              >
-                <h3 className="text-lg font-semibold text-neutral-900">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-500">
-                  {item.text}
-                </p>
-              </motion.article>
-            ))}
-          </motion.div>
+
+          <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-2 md:gap-16 lg:gap-24">
+            <Reveal>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/40">
+                {t.about.eyebrow}
+              </p>
+              <h2 className="font-display mt-5 text-5xl font-black uppercase leading-[0.92] tracking-tight text-white sm:text-6xl">
+                {t.about.title}
+              </h2>
+              <p className="mt-6 text-sm leading-relaxed text-white/55">
+                {t.about.description}
+              </p>
+            </Reveal>
+
+            <motion.div
+              variants={staggerParent}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {t.about.cards.map((item, i) => (
+                <motion.article
+                  key={item.title}
+                  className="flex gap-6 border-t border-white/10 py-6 last:border-b last:border-white/10"
+                  variants={staggerItem}
+                  transition={itemTransition}
+                >
+                  <span className="mt-0.5 shrink-0 font-mono text-[10px] font-semibold tracking-[0.2em] text-white/20">
+                    0{i + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/55">
+                      {item.text}
+                    </p>
+                  </div>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      <section
-        id="pricing"
-        lang={hero.sectionLang}
-        className="scroll-mt-24 border-b border-neutral-200 bg-white"
-      >
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      {/* ── PRICING — light gray ── */}
+      <section id="pricing" lang={hero.sectionLang} className="scroll-mt-16 border-b border-neutral-200 bg-neutral-50">
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-16">
           <Reveal>
-            <SectionHeading
-              eyebrow={t.pricing.eyebrow}
-              title={t.pricing.title}
-              description={t.pricing.description}
-            />
+            <SectionDivider number="003" label="RATES" />
           </Reveal>
-          <motion.ul
-            className="mt-10 border border-neutral-200 bg-neutral-50"
-            variants={staggerParent}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-          >
-            {t.pricing.rows.map((row) => (
-              <motion.li
-                key={row.id}
-                className="flex flex-col gap-2 border-b border-neutral-200 px-5 py-5 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
-                variants={staggerItem}
-                transition={itemTransition}
-              >
-                <div>
-                  <p className="font-semibold text-neutral-900">{row.name}</p>
-                  {row.note ? (
-                    <p className="mt-1 text-sm text-neutral-500">{row.note}</p>
-                  ) : null}
-                </div>
-                <p className="shrink-0 text-sm font-semibold text-neutral-900 sm:text-base">
-                  {row.price}
-                </p>
-              </motion.li>
-            ))}
-          </motion.ul>
-          <Reveal className="mt-6 block" delay={0.06}>
-            <p className="text-sm text-neutral-500">
-              {t.pricing.footerBefore}
-              <a
-                href="#contact"
-                className="font-medium text-neutral-900 underline underline-offset-2 hover:no-underline"
-              >
-                {t.pricing.footerLink}
-              </a>
-              {t.pricing.footerAfter}
-            </p>
-          </Reveal>
+
+          <div className="mt-12 sm:mt-16">
+            <Reveal>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-400">
+                {t.pricing.eyebrow}
+              </p>
+              <h2 className="font-display mt-5 text-5xl font-black uppercase leading-[0.92] tracking-tight text-neutral-900 sm:text-6xl">
+                {t.pricing.title}
+              </h2>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-500">
+                {t.pricing.description}
+              </p>
+            </Reveal>
+
+            <motion.div
+              className="mt-10 border border-neutral-200 bg-white"
+              variants={staggerParent}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {t.pricing.rows.map((row, i) => (
+                <motion.div
+                  key={row.id}
+                  className="flex flex-col gap-1 border-b border-neutral-100 px-6 py-5 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
+                  variants={staggerItem}
+                  transition={itemTransition}
+                >
+                  <div className="flex items-start gap-5">
+                    <span className="mt-0.5 shrink-0 font-mono text-[10px] font-semibold tracking-[0.2em] text-neutral-300">
+                      0{i + 1}
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-neutral-900">{row.name}</p>
+                      {row.note && (
+                        <p className="mt-0.5 text-xs text-neutral-400">{row.note}</p>
+                      )}
+                    </div>
+                  </div>
+                  <p className="ml-10 shrink-0 text-sm font-bold uppercase tracking-[0.12em] text-neutral-900 sm:ml-0">
+                    {row.price}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <Reveal className="mt-5" delay={0.06}>
+              <p className="text-xs text-neutral-400">
+                {t.pricing.footerBefore}
+                <a
+                  href="#contact"
+                  className="font-semibold text-neutral-700 underline underline-offset-2 hover:no-underline"
+                >
+                  {t.pricing.footerLink}
+                </a>
+                {t.pricing.footerAfter}
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <section
-        id="contact"
-        lang={hero.sectionLang}
-        className="scroll-mt-24 bg-neutral-50"
-      >
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      {/* ── CONTACT — white ── */}
+      <section id="contact" lang={hero.sectionLang} className="scroll-mt-16 bg-white">
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-16">
           <Reveal>
-            <div className="border border-neutral-200 bg-white p-8 sm:p-12">
-              <SectionHeading
-                eyebrow={t.contact.eyebrow}
-                title={t.contact.title}
-                description={t.contact.description}
-              />
+            <SectionDivider number="004" label="CONTACT" />
+          </Reveal>
+
+          <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-2 md:gap-16 lg:gap-24">
+            <Reveal>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-400">
+                {t.contact.eyebrow}
+              </p>
+              <h2 className="font-display mt-5 text-5xl font-black uppercase leading-[0.92] tracking-tight text-neutral-900 sm:text-6xl">
+                {t.contact.title}
+              </h2>
+              <p className="mt-6 text-sm leading-relaxed text-neutral-500">
+                {t.contact.description}
+              </p>
+            </Reveal>
+
+            <motion.div
+              variants={staggerParent}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
               <motion.div
-                className="mt-8 flex gap-3 border-b border-neutral-200 pb-8"
+                className="flex items-start justify-between border-t border-neutral-200 py-6"
                 variants={staggerItem}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
                 transition={itemTransition}
               >
-                <MapPin
-                  className="mt-0.5 size-5 shrink-0 text-neutral-500"
-                  aria-hidden
-                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.15em] text-neutral-500">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-neutral-400">
+                    <Mail className="mb-0.5 mr-1.5 inline size-3" aria-hidden />
+                    Email
+                  </p>
+                  <a
+                    href="mailto:iuliiavlasova.fr@gmail.com"
+                    className="mt-2 block text-sm font-semibold text-neutral-900 transition-colors hover:text-neutral-500"
+                  >
+                    iuliiavlasova.fr@gmail.com
+                  </a>
+                </div>
+                <a
+                  href="mailto:iuliiavlasova.fr@gmail.com"
+                  aria-label="Send email"
+                  className="mt-0.5 flex size-8 shrink-0 items-center justify-center border border-neutral-200 text-neutral-500 transition-colors hover:border-neutral-900 hover:bg-neutral-900 hover:text-white"
+                >
+                  <ArrowUpRight className="size-3.5" />
+                </a>
+              </motion.div>
+
+              <motion.div
+                className="flex items-start justify-between border-t border-neutral-200 py-6"
+                variants={staggerItem}
+                transition={itemTransition}
+              >
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-neutral-400">
+                    <Phone className="mb-0.5 mr-1.5 inline size-3" aria-hidden />
+                    Phone
+                  </p>
+                  <a
+                    href="tel:+33743679886"
+                    className="mt-2 block text-sm font-semibold text-neutral-900 transition-colors hover:text-neutral-500"
+                  >
+                    +33 7 43 67 98 86
+                  </a>
+                </div>
+                <a
+                  href="tel:+33743679886"
+                  aria-label="Call"
+                  className="mt-0.5 flex size-8 shrink-0 items-center justify-center border border-neutral-200 text-neutral-500 transition-colors hover:border-neutral-900 hover:bg-neutral-900 hover:text-white"
+                >
+                  <ArrowUpRight className="size-3.5" />
+                </a>
+              </motion.div>
+
+              <motion.div
+                className="flex items-start justify-between border-t border-b border-neutral-200 py-6"
+                variants={staggerItem}
+                transition={itemTransition}
+              >
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-neutral-400">
+                    <MapPin className="mb-0.5 mr-1.5 inline size-3" aria-hidden />
                     {t.contact.addressLabel}
                   </p>
-                  <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-neutral-900">
+                  <p className="mt-2 whitespace-pre-line text-sm font-semibold leading-relaxed text-neutral-900">
                     {t.contact.address}
                   </p>
                 </div>
+                <MapPin className="mt-0.5 size-4 shrink-0 text-neutral-300" aria-hidden />
               </motion.div>
-              <motion.div
-                className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
-                variants={staggerParent}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-              >
-                <motion.a
-                  href="mailto:iuliiavlasova.fr@gmail.com"
-                  className="inline-flex items-center justify-center gap-3 border border-neutral-900 bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
-                  variants={staggerItem}
-                  transition={itemTransition}
-                  whileHover={reduce ? undefined : { y: -2 }}
-                  whileTap={reduce ? undefined : { scale: 0.98 }}
-                >
-                  <Mail className="size-4 shrink-0" />
-                  iuliiavlasova.fr@gmail.com
-                </motion.a>
-                <motion.a
-                  href="tel:+33743679886"
-                  className="inline-flex items-center justify-center gap-3 border-2 border-neutral-900 bg-white px-6 py-3 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-50"
-                  variants={staggerItem}
-                  transition={itemTransition}
-                  whileHover={reduce ? undefined : { y: -2 }}
-                  whileTap={reduce ? undefined : { scale: 0.98 }}
-                >
-                  <Phone className="size-4 shrink-0" />
-                  +33 7 43 67 98 86
-                </motion.a>
-              </motion.div>
-            </div>
-          </Reveal>
+            </motion.div>
+          </div>
         </div>
       </section>
     </>

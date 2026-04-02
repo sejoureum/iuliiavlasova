@@ -8,7 +8,7 @@ import { useSiteLanguage } from '@/context/SiteLanguageContext'
 import { siteContent, type SiteLang } from '@/i18n/siteContent'
 
 const langTabs: { id: SiteLang; label: string }[] = [
-  { id: 'en', label: 'ENG' },
+  { id: 'en', label: 'EN' },
   { id: 'fr', label: 'FR' },
   { id: 'ru', label: 'RU' },
 ]
@@ -18,6 +18,7 @@ export function Header() {
   const { lang, setLang } = useSiteLanguage()
   const t = siteContent[lang]
   const nav = [
+    { href: '/', label: 'Home' },
     { href: '#about', label: t.nav.about },
     { href: '#pricing', label: t.nav.pricing },
     { href: '#contact', label: t.nav.contact },
@@ -31,36 +32,47 @@ export function Header() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: reduce ? 0 : 0.42, ease: easeOut }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-        <Link
-          to="/"
-          className="flex flex-col gap-0.5 text-neutral-900"
-        >
-          <span className="text-base font-semibold tracking-tight sm:text-lg">
-            Iuliia VLASOVA
-          </span>
-          <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-500 sm:text-xs">
-            IT Consulting Services
-          </span>
-        </Link>
-
-        <div className="flex items-center gap-3 sm:gap-4">
-          <nav className="hidden items-center gap-8 md:flex">
-            {nav.map((item) => (
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
+        {/* Desktop nav with "/" separators */}
+        <nav className="hidden items-center md:flex">
+          {nav.map((item, i) => (
+            <span key={item.href} className="flex items-center">
+              {i > 0 && (
+                <span className="mx-3 select-none text-[10px] text-neutral-300">/</span>
+              )}
               <a
-                key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-neutral-600 transition hover:text-neutral-900"
+                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500 transition-colors hover:text-neutral-900"
               >
                 {item.label}
               </a>
-            ))}
-          </nav>
+            </span>
+          ))}
+        </nav>
 
+        {/* Mobile: brand + burger */}
+        <Link
+          to="/"
+          className="font-display text-base font-black uppercase tracking-tight text-neutral-900 md:hidden"
+        >
+          VLASOVA.
+        </Link>
+        <button
+          type="button"
+          className="p-1.5 text-neutral-900 md:hidden"
+          aria-expanded={open}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
+
+        {/* Right: lang switcher + brand */}
+        <div className="hidden items-center gap-5 md:flex">
           <div
             role="group"
             aria-label={t.ariaLangSwitcher}
-            className="flex shrink-0 border border-neutral-900 bg-white"
+            className="flex items-center divide-x divide-neutral-200"
           >
             {langTabs.map(({ id, label }) => (
               <button
@@ -68,10 +80,10 @@ export function Header() {
                 type="button"
                 onClick={() => setLang(id)}
                 className={cn(
-                  'min-w-[2.75rem] rounded-none border-0 border-r border-neutral-900 px-2.5 py-1.5 text-xs font-semibold tracking-wide transition last:border-r-0 sm:min-w-[3rem] sm:px-3 sm:py-2',
+                  'px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] transition first:pl-0 last:pr-0',
                   lang === id
-                    ? 'bg-neutral-900 text-white'
-                    : 'bg-white text-neutral-900 hover:bg-neutral-100',
+                    ? 'text-neutral-900'
+                    : 'text-neutral-400 hover:text-neutral-700',
                 )}
                 aria-pressed={lang === id}
               >
@@ -79,37 +91,46 @@ export function Header() {
               </button>
             ))}
           </div>
-
-          <button
-            type="button"
-            className="rounded-none p-2 text-neutral-900 md:hidden"
-            aria-expanded={open}
-            aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
-            onClick={() => setOpen((v) => !v)}
+          <Link
+            to="/"
+            className="font-display text-xl font-black uppercase tracking-tight text-neutral-900"
           >
-            {open ? <X className="size-6" /> : <Menu className="size-6" />}
-          </button>
+            VLASOVA.
+          </Link>
         </div>
       </div>
 
-      <div
-        className={cn(
-          'border-t border-neutral-200 md:hidden',
-          open ? 'block' : 'hidden',
-        )}
-      >
-        <nav className="flex flex-col gap-1 px-4 py-3 sm:px-6">
+      {/* Mobile dropdown */}
+      <div className={cn('border-t border-neutral-100 md:hidden', open ? 'block' : 'hidden')}>
+        <nav className="flex flex-col px-4 py-2 sm:px-6">
           {nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="rounded-none px-3 py-2 text-sm font-medium text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
+              className="border-b border-neutral-100 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500 last:border-0 hover:text-neutral-900"
               onClick={() => setOpen(false)}
             >
               {item.label}
             </a>
           ))}
         </nav>
+        <div className="flex items-center border-t border-neutral-100 px-4 py-3 sm:px-6">
+          {langTabs.map(({ id, label }, i) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setLang(id)}
+              className={cn(
+                'px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] transition',
+                i > 0 && 'border-l border-neutral-200',
+                lang === id ? 'text-neutral-900' : 'text-neutral-400',
+              )}
+              aria-pressed={lang === id}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
     </motion.header>
   )

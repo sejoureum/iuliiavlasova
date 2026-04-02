@@ -2,12 +2,16 @@
 
 @theme {
   --font-sans: 'DM Sans', system-ui, sans-serif;
-  /* Monochrome: white, very light gray, black */
-  --color-canvas: #fafafa;
-  --color-ink: #0a0a0a;
-  --color-muted: #737373;
-  --color-accent: #0a0a0a;
-  --color-accent-soft: #e5e5e5;
+  --font-display: 'DM Sans', system-ui, sans-serif;
+}
+
+@keyframes cube-cw {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+@keyframes cube-ccw {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(-360deg); }
 }
 
 html {
@@ -19,7 +23,7 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-sans);
-  background: var(--color-canvas);
-  color: var(--color-ink);
+  background: #ffffff;
+  color: #0a0a0a;
   -webkit-font-smoothing: antialiased;
 }
