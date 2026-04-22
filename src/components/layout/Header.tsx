@@ -19,6 +19,7 @@ export function Header() {
   const t = siteContent[lang]
   const nav = [
     { href: '/', label: 'Home' },
+    { href: '#sejouh', label: t.nav.sejouh },
     { href: '#about', label: t.nav.about },
     { href: '#pricing', label: t.nav.pricing },
     { href: '#contact', label: t.nav.contact },

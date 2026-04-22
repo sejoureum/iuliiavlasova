@@ -8,10 +8,27 @@ export type PricingRow = {
 }
 
 export type SiteStrings = {
-  nav: { about: string; pricing: string; contact: string }
+  nav: { sejouh: string; about: string; pricing: string; contact: string }
   ariaLangSwitcher: string
   ariaWhatsApp: string
   ariaTelegram: string
+  sejouh: {
+    eyebrow: string
+    label: string
+    headline: string
+    sub: string
+    description: string
+    pill1: string
+    pill2: string
+    pill3: string
+    cta: string
+    stat1value: string
+    stat1label: string
+    stat2value: string
+    stat2label: string
+    stat3value: string
+    stat3label: string
+  }
   hero: {
     sectionLang: string
     eyebrow: string
@@ -49,10 +66,28 @@ export type SiteStrings = {
 
 export const siteContent: Record<SiteLang, SiteStrings> = {
   en: {
-    nav: { about: 'About', pricing: 'Pricing', contact: 'Contact' },
+    nav: { sejouh: 'Séjouh', about: 'About', pricing: 'Pricing', contact: 'Contact' },
     ariaLangSwitcher: 'Interface language',
     ariaWhatsApp: 'Chat on WhatsApp',
     ariaTelegram: 'Chat on Telegram',
+    sejouh: {
+      eyebrow: 'Flagship product',
+      label: 'Séjouh',
+      headline: 'The digital Welcome Board\nfor independent hotels.',
+      sub: 'SaaS · Hospitality · France',
+      description:
+        'Séjouh replaces paper welcome folders with a personalised digital board — WiFi, check-in times, local recommendations, contacts — all accessible via one link or QR code. No app. No friction. No paper.',
+      pill1: 'Ready in 5 minutes',
+      pill2: 'Zero paper',
+      pill3: 'No credit card',
+      cta: 'Discover Séjouh →',
+      stat1value: '−45 %',
+      stat1label: 'calls to reception',
+      stat2value: '5 min',
+      stat2label: 'to go live',
+      stat3value: '0 kg',
+      stat3label: 'paper printed per week',
+    },
     hero: {
       sectionLang: 'en',
       eyebrow: 'IT Consulting Services',
@@ -130,10 +165,28 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
     footerSiren: 'SIREN 103014544',
   },
   fr: {
-    nav: { about: 'À propos', pricing: 'Tarifs', contact: 'Contact' },
-    ariaLangSwitcher: 'Langue de l’interface',
-    ariaWhatsApp: 'Discuter sur WhatsApp',
-    ariaTelegram: 'Discuter sur Telegram',
+    nav: { sejouh: "Séjouh", about: "À propos", pricing: "Tarifs", contact: "Contact" },
+    ariaLangSwitcher: "Langue de l’interface",
+    ariaWhatsApp: "Discuter sur WhatsApp",
+    ariaTelegram: "Discuter sur Telegram",
+    sejouh: {
+      eyebrow: "Produit phare",
+      label: "Séjouh",
+      headline: "Le Welcome Board digital\npour les hôtels indépendants.",
+      sub: "SaaS · Hôtellerie · France",
+      description:
+        "Séjouh remplace les livrets d’accueil papier par un board digital personnalisé — WiFi, horaires, recommandations locales, contacts — accessible en un lien ou un QR code. Sans appli. Sans friction. Sans papier.",
+      pill1: "Prêt en 5 minutes",
+      pill2: "Zéro papier",
+      pill3: "Sans carte bancaire",
+      cta: "Découvrir Séjouh →",
+      stat1value: "−45 %",
+      stat1label: "d’appels à la réception",
+      stat2value: "5 min",
+      stat2label: "pour être opérationnel",
+      stat3value: "0 kg",
+      stat3label: "de papier imprimé par semaine",
+    },
     hero: {
       sectionLang: 'fr',
       eyebrow: 'Services de conseil IT',
@@ -211,10 +264,28 @@ export const siteContent: Record<SiteLang, SiteStrings> = {
     footerSiren: 'SIREN 103014544',
   },
   ru: {
-    nav: { about: 'Обо мне', pricing: 'Цены', contact: 'Контакты' },
+    nav: { sejouh: 'Séjouh', about: 'Обо мне', pricing: 'Цены', contact: 'Контакты' },
     ariaLangSwitcher: 'Язык интерфейса',
     ariaWhatsApp: 'Написать в WhatsApp',
     ariaTelegram: 'Написать в Telegram',
+    sejouh: {
+      eyebrow: 'Главный продукт',
+      label: 'Séjouh',
+      headline: 'Цифровой Welcome Board\nдля независимых отелей.',
+      sub: 'SaaS · Гостиничная отрасль · Франция',
+      description:
+        'Séjouh заменяет бумажные папки приветствия цифровым персонализированным бордом — WiFi, расписание заезда, рекомендации, контакты — всё в одной ссылке или QR-коде. Без приложения. Без бумаги.',
+      pill1: 'Готово за 5 минут',
+      pill2: 'Ноль бумаги',
+      pill3: 'Без карты',
+      cta: 'Открыть Séjouh →',
+      stat1value: '−45 %',
+      stat1label: 'звонков на ресепшн',
+      stat2value: '5 мин',
+      stat2label: 'до запуска',
+      stat3value: '0 кг',
+      stat3label: 'бумаги в неделю',
+    },
     hero: {
       sectionLang: 'ru',
       eyebrow: 'IT-консалтинг',

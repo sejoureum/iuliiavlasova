@@ -118,11 +118,106 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* ── SÉJOUH — flagship product ── */}
+      <section id="sejouh" lang="fr" className="scroll-mt-16 bg-[#1C1D24]">
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-16">
+          <Reveal>
+            <SectionDivider number="002" label="SÉJOUH" dark />
+          </Reveal>
+
+          <div className="mt-12 sm:mt-16">
+            <Reveal>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[oklch(0.55_0.28_350)]/70">
+                {t.sejouh.eyebrow}
+              </p>
+
+              {/* Product name */}
+              <div className="mt-5 flex items-center gap-4">
+                {/* Lozenge brand mark */}
+                <span
+                  className="inline-block shrink-0 rounded-full"
+                  style={{ width: 18, height: 18, backgroundColor: 'oklch(0.55 0.28 350)' }}
+                  aria-hidden
+                />
+                <h2 className="font-display text-5xl font-black uppercase leading-[0.92] tracking-tight text-white sm:text-6xl">
+                  {t.sejouh.label}
+                </h2>
+              </div>
+
+              <p className="font-display mt-4 whitespace-pre-line text-3xl font-bold leading-tight tracking-tight text-white/80 sm:text-4xl">
+                {t.sejouh.headline}
+              </p>
+
+              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/25">
+                {t.sejouh.sub}
+              </p>
+
+              <p className="mt-6 max-w-xl text-sm leading-relaxed text-white/55">
+                {t.sejouh.description}
+              </p>
+
+              {/* Pills */}
+              <div className="mt-6 flex flex-wrap gap-2">
+                {[t.sejouh.pill1, t.sejouh.pill2, t.sejouh.pill3].map((pill) => (
+                  <span
+                    key={pill}
+                    className="inline-flex items-center rounded-full border border-white/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40"
+                  >
+                    {pill}
+                  </span>
+                ))}
+              </div>
+
+              <a
+                href="https://sejouh.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 border border-[oklch(0.55_0.28_350)] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[oklch(0.75_0.18_350)] transition-colors hover:bg-[oklch(0.55_0.28_350)] hover:text-white"
+              >
+                {t.sejouh.cta}
+              </a>
+            </Reveal>
+
+            {/* Stats row */}
+            <motion.div
+              className="mt-14 grid grid-cols-3 divide-x divide-white/10 border border-white/10"
+              variants={staggerContainerFor(!!reduce)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {[
+                { value: t.sejouh.stat1value, label: t.sejouh.stat1label },
+                { value: t.sejouh.stat2value, label: t.sejouh.stat2label },
+                { value: t.sejouh.stat3value, label: t.sejouh.stat3label },
+              ].map((stat) => (
+                <motion.div
+                  key={stat.label}
+                  className="px-6 py-8 text-center"
+                  variants={staggerItem}
+                  transition={{ duration: dur, ease: easeOut }}
+                >
+                  <p
+                    className="text-4xl font-black tracking-tight sm:text-5xl"
+                    style={{ color: 'oklch(0.55 0.28 350)' }}
+                  >
+                    {stat.value}
+                  </p>
+                  <p className="mt-2 text-[11px] leading-snug text-white/35">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ── ABOUT — black ── */}
       <section id="about" lang={hero.sectionLang} className="scroll-mt-16 bg-neutral-900">
         <div className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-16">
           <Reveal>
-            <SectionDivider number="002" label="ABOUT" dark />
+            <SectionDivider number="003" label="ABOUT" dark />
           </Reveal>
 
           <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-2 md:gap-16 lg:gap-24">
@@ -173,7 +268,7 @@ export function HomePage() {
       <section id="pricing" lang={hero.sectionLang} className="scroll-mt-16 border-b border-neutral-200 bg-neutral-50">
         <div className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-16">
           <Reveal>
-            <SectionDivider number="003" label="RATES" />
+            <SectionDivider number="004" label="RATES" />
           </Reveal>
 
           <div className="mt-12 sm:mt-16">
@@ -241,7 +336,7 @@ export function HomePage() {
       <section id="contact" lang={hero.sectionLang} className="scroll-mt-16 bg-white">
         <div className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-16">
           <Reveal>
-            <SectionDivider number="004" label="CONTACT" />
+            <SectionDivider number="005" label="CONTACT" />
           </Reveal>
 
           <div className="mt-12 grid gap-12 sm:mt-16 md:grid-cols-2 md:gap-16 lg:gap-24">
